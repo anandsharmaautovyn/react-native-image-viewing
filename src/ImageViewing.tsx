@@ -15,6 +15,7 @@ import {
   VirtualizedList,
   ModalProps,
   Modal,
+  Platform,
 } from "react-native";
 
 import ImageItem from "./components/ImageItem/ImageItem";
@@ -93,15 +94,7 @@ function ImageViewing({
   }
 
   return (
-    <Modal
-      transparent={presentationStyle === "overFullScreen"}
-      visible={visible}
-      presentationStyle={presentationStyle}
-      animationType={animationType}
-      onRequestClose={onRequestCloseEnhanced}
-      supportedOrientations={["portrait"]}
-      hardwareAccelerated
-    >
+    <Modal transparent={presentationStyle === "overFullScreen"} visible={visible} presentationStyle={presentationStyle} animationType={animationType} onRequestClose={onRequestCloseEnhanced} supportedOrientations={Platform.OS === 'ios' ? Platform.isPad ? ['landscape-left', 'landscape-right'] : ['portrait'] : undefined} hardwareAccelerated>
       <StatusBarManager presentationStyle={presentationStyle} />
       <View style={[styles.container, { opacity, backgroundColor }]}>
         <Animated.View style={[styles.header, { transform: headerTransform }]}>
